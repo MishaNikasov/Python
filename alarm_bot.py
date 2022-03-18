@@ -7,7 +7,7 @@ from aiogram.utils import executor
 from model.AlarmModel import AlarmModel
 from service import alarm_service
 
-bot = Bot('773281112:AAH6yZY-zN0cmQfooaNtz5jkIGN_dkNWSR8')
+bot = Bot('5211159874:AAFp5BEJc8pQNW9ZrzXDYJzQi53vinjrXfY')
 dispatcher = Dispatcher(bot)
 
 
