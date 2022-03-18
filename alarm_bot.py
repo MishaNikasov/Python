@@ -14,7 +14,7 @@ dispatcher = Dispatcher(bot)
 @dispatcher.message_handler(commands=['start'])
 async def start(message: types.Message):
     print(str(message.chat.full_name) + ' https://t.me/' + str(message.chat.username) + ' connected')
-    await message.answer('Запуск мониторинга')
+    await message.answer('Запуск мониторинга ' + is_bandertown(message.chat.full_name))
     await __monitoring(message)
 
 
@@ -37,10 +37,10 @@ async def __monitoring(message: types.Message):
 
 async def __handle_alarm(alarm: AlarmModel, message: types.Message):
     if alarm.status:
-        print('Отбой тревоги')
+        print('Отбой тревоги ' + is_bandertown(message.chat.full_name))
         await message.answer('🟢 Отбой тревоги: ' + alarm.update_time)
     else:
-        print('Тревога')
+        print('Тревога ' + is_bandertown(message.chat.full_name))
         await message.answer('🔴 Тревога: ' + alarm.update_time)
 
 
@@ -49,6 +49,13 @@ def handle_state(state: AlarmModel):
         return "По кайфу"
     else:
         return "Ты еще не в коридоре?"
+
+
+def is_bandertown(group_name: str):
+    if group_name == 'Східний Бандертаун':
+        return '\n@SolnechnyjKudesnik\n@TheSkywallker\n@jar_1k\n@KiraBaril\n@DelphinGoth\n@Tymurrrr\n@Studa'
+    else:
+        return ''
 
 
 executor.start_polling(dispatcher, skip_updates=True)
