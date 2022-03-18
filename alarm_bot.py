@@ -20,7 +20,7 @@ async def start(message: types.Message):
 
 @dispatcher.message_handler(commands=['state'])
 async def get_state(message: types.Message):
-    state = alarm_service.get_alarm()
+    state = handle_state(alarm_service.get_alarm())
     await message.answer(state)
 
 
