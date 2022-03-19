@@ -27,7 +27,7 @@ async def get_state(message: types.Message):
 async def __monitoring(message: types.Message):
     alarm_state = True
     while True:
-        await asyncio.sleep(2)
+        await asyncio.sleep(20)
         current_alarm = alarm_service.get_alarm()
         if alarm_state != current_alarm.status:
             print('Обновление информации о состоянии: ' + current_alarm.update_time)
