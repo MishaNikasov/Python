@@ -14,7 +14,7 @@ dispatcher = Dispatcher(bot)
 @dispatcher.message_handler(commands=['start'])
 async def start(message: types.Message):
     print(str(message.chat.full_name) + ' https://t.me/' + str(message.chat.username) + ' connected')
-    await message.answer('Запуск мониторинга ' + is_bandertown(message.chat.full_name))
+    await message.answer('Запуск мониторинга')
     await __monitoring(message)
 
 
