@@ -27,7 +27,7 @@ async def get_state(message: types.Message):
 async def __monitoring(message: types.Message):
     alarm_state = True
     while True:
-        await asyncio.sleep(20)
+        await asyncio.sleep(2)
         current_alarm = alarm_service.get_alarm()
         if alarm_state != current_alarm.status:
             print('Обновление информации о состоянии: ' + current_alarm.update_time)
@@ -38,14 +38,14 @@ async def __monitoring(message: types.Message):
 async def __handle_alarm(alarm: AlarmModel, message: types.Message):
     if alarm.status:
         print('Отбой тревоги ' + is_bandertown(message.chat.full_name))
-        await message.answer('🟢 Отбой тревоги: ' + alarm.update_time)
+        await message.answer('🟢 Отбой тревоги: ' + is_bandertown(message.chat.full_name))
     else:
         print('Тревога ' + is_bandertown(message.chat.full_name))
-        await message.answer('🔴 Тревога: ' + alarm.update_time)
+        await message.answer('🔴 Тревога: ' + is_bandertown(message.chat.full_name))
 
 
 def handle_state(state: AlarmModel):
-    if state:
+    if state.status:
         return "По кайфу"
     else:
         return "Ты еще не в коридоре?"
