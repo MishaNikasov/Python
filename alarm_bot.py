@@ -21,7 +21,7 @@ async def start(message: types.Message):
 @dispatcher.message_handler(commands=['state'])
 async def get_state(message: types.Message):
     state = handle_state(alarm_service.get_alarm())
-    await message.answer(state)
+    await message.reply(state)
 
 
 async def __monitoring(message: types.Message):
@@ -37,11 +37,11 @@ async def __monitoring(message: types.Message):
 
 async def __handle_alarm(alarm: AlarmModel, message: types.Message):
     if alarm.status:
-        print('Отбой тревоги ' + is_bandertown(message.chat.full_name))
-        await message.answer('🟢 Отбой тревоги: ' + is_bandertown(message.chat.full_name))
+        print('Отбой тревоги: ' + alarm.update_time + ' = ' + message.chat.full_name)
+        await message.answer('🟢 Отбой тревоги: ' + alarm.update_time + is_bandertown(message.chat.full_name))
     else:
-        print('Тревога ' + is_bandertown(message.chat.full_name))
-        await message.answer('🔴 Тревога: ' + is_bandertown(message.chat.full_name))
+        print('Тревога: ' + alarm.update_time + ' = ' + message.chat.full_name)
+        await message.answer('🔴 Тревога: ' + alarm.update_time + is_bandertown(message.chat.full_name))
 
 
 def handle_state(state: AlarmModel):
