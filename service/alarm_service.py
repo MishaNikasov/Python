@@ -16,6 +16,13 @@ def get_alarm():
 
 def __get_alarm_response():
     url = URL + str(date_manager.get_current_time_in_millis())
-    alarm_request = requests.get(url)
-    alarm_json_response = alarm_request.json()
-    return alarm_json_response
+    try:
+        alarm_request = requests.get(url)
+        alarm_json_response = alarm_request.json()
+        return alarm_json_response
+    except requests.exceptions.Timeout as e:
+        print('Ошибка сервера: Timeout - ' + str(e))
+    except requests.exceptions.TooManyRedirects as e:
+        print('Ошибка сервера: TooManyRedirects - ' + str(e))
+    except requests.exceptions.RequestException as e:
+        print('Ошибка сервера: RequestException - ' + str(e))
