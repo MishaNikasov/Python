@@ -85,7 +85,7 @@ def is_bandertown(group_name: str):
 
 
 async def __monitoring():
-    alarm_state = False
+    alarm_state = True
     while True:
         await asyncio.sleep(20)
         current_alarm = alarm_service.get_alarm()
