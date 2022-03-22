@@ -10,8 +10,15 @@ def get_alarm():
     json = __get_alarm_response()
     vin_state = json['cities']['3159']
     update_date = json["updated_at"]
-    alarm_model = AlarmModel(vin_state, update_date)
+    alarm_model = AlarmModel(parse_state(vin_state), update_date)
     return alarm_model
+
+
+def parse_state(state: str):
+    if state == 'true':
+        return True
+    else:
+        return False
 
 
 def __get_alarm_response():

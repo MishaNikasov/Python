@@ -43,7 +43,7 @@ async def state(message: types.Message):
 
 async def __add_to_monitoring(message: types.Message):
     if data_store.save_chat(message.chat.id):
-        print(str(message.chat.full_name) + ' https://t.me/' + str(message.chat.username) + ' connected')
+        print(f'{str(message.chat.full_name)} https://t.me/{str(message.chat.username)} connected')
         await bot.send_message(message.chat.id, 'Запуск мониторинга')
     else:
         await bot.send_photo(message.chat.id, 'https://prnt.sc/740HpA9Fbsdw', reply_to_message_id=message.message_id)
@@ -51,7 +51,7 @@ async def __add_to_monitoring(message: types.Message):
 
 async def __remove_from_monitoring(message: types.Message):
     if data_store.remove_chat(message.chat.id):
-        print(str(message.chat.full_name) + ' https://t.me/' + str(message.chat.username) + ' removed from monitoring')
+        print(f'{str(message.chat.full_name)} https://t.me/{str(message.chat.username)} removed from monitoring')
         await bot.send_message(message.chat.id, 'Остановка мониторинга')
     else:
         await bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEEN3JiNxonIyJEZCfFrjfvFFld63kFZgACPhUAAuE7yEshrvTovPQkDyME', reply_to_message_id=message.message_id)
@@ -66,8 +66,8 @@ async def __handle_alarm(alarm: AlarmModel, chat_id: int):
         await bot.send_message(chat_id, f'🔴 Тревога: {alarm.update_time}{is_bandertown(chat_id)}')
 
 
-def handle_state(state: AlarmModel):
-    if state.status:
+def handle_state(alarm_state: AlarmModel):
+    if alarm_state.status:
         return "По кайфу"
     else:
         return "Ты еще не в коридоре?"
