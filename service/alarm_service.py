@@ -15,9 +15,10 @@ def get_alarm():
 
 
 def __get_alarm_response():
+    session = requests.Session()
     url = URL + str(date_manager.get_current_time_in_millis())
     try:
-        alarm_request = requests.get(url)
+        alarm_request = session.get(url)
         alarm_json_response = alarm_request.json()
         return alarm_json_response
     except requests.exceptions.Timeout as e:
